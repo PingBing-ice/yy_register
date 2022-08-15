@@ -1,0 +1,32 @@
+server:
+  port: 8206
+
+spring:
+  application:
+    name: service-msm
+  profiles:
+    active: dev
+  redis:
+    host: 172.20.10.9
+    port: 6379
+    database: 1
+    timeout: 1800000
+    lettuce:
+      pool:
+        max-active: 20
+        max-wait: -1
+        max-idle: 5
+        min-idle: 0
+    password: 123456
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:com/yy/msm/mapper/xml/*.xml
