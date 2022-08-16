@@ -2,8 +2,12 @@ package com.yy.msm.service.Impl;
 
 import com.yy.msm.service.MsmService;
 import com.yy.msm.util.HttpUtils;
+
+
 import com.yy.msm.util.RandomUtil;
 import com.yy.util.exception.RException;
+import com.yy.yygh.vo.msm.MsmVo;
+import lombok.extern.log4j.Log4j2;
 import org.apache.http.HttpResponse;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -20,10 +24,20 @@ import java.util.regex.Pattern;
  * @date 2022/8/10 11:48
  */
 @Service
+@Log4j2
 public class MsmServiceImpl implements MsmService {
 
     @Resource
     private StringRedisTemplate stringRedisTemplate;
+
+
+    @Override
+    public void send(MsmVo msmVo) {
+        log.info(msmVo);
+        String fourBitRandom = RandomUtil.getFourBitRandom();
+        stringRedisTemplate.opsForValue().set(msmVo.getPhone()+"=="+fourBitRandom,"发送成功",3,TimeUnit.MINUTES);
+
+    }
 
     @Override
     public boolean sendCode(String phone) {

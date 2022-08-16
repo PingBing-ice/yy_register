@@ -17,6 +17,7 @@ import com.yy.yygh.model.hosp.Hospital;
 import com.yy.yygh.model.hosp.Schedule;
 import com.yy.yygh.vo.hosp.BookingScheduleRuleVo;
 import com.yy.yygh.vo.hosp.ScheduleOrderVo;
+import com.yy.yygh.vo.order.OrderMqVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -53,6 +54,19 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Resource
     private HospitalService hospitalService;
 
+
+    @Override
+    public boolean update(OrderMqVo orderMqVo) {
+        try {
+            Schedule schedule = scheduleRepository.findById(orderMqVo.getScheduleId()).get();
+            schedule.setReservedNumber(orderMqVo.getReservedNumber());
+            schedule.setAvailableNumber(orderMqVo.getAvailableNumber());
+            scheduleRepository.save(schedule);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
     @Override
     public ScheduleOrderVo getFeignScheduleById(String id) {

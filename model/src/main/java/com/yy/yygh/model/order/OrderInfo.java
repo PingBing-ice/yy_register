@@ -30,7 +30,7 @@ public class OrderInfo extends BaseEntity {
 
 	@ApiModelProperty(value = "userId")
 	@TableField("user_id")
-	private Long userId;
+	private String userId;
 
 	@ApiModelProperty(value = "订单交易号")
 	@TableField("out_trade_no")
@@ -71,7 +71,7 @@ public class OrderInfo extends BaseEntity {
 
 	@ApiModelProperty(value = "就诊人id")
 	@TableField("patient_id")
-	private Long patientId;
+	private String patientId;
 
 	@ApiModelProperty(value = "就诊人名称")
 	@TableField("patient_name")

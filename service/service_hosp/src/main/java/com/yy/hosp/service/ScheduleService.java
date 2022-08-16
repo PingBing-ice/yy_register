@@ -2,6 +2,7 @@ package com.yy.hosp.service;
 
 import com.yy.yygh.model.hosp.Schedule;
 import com.yy.yygh.vo.hosp.ScheduleOrderVo;
+import com.yy.yygh.vo.order.OrderMqVo;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -50,4 +51,7 @@ public interface ScheduleService {
     Schedule getScheduleById(String id);
 
     ScheduleOrderVo getFeignScheduleById(String id);
+
+    boolean update(OrderMqVo orderMqVo);
+
 }

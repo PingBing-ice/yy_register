@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient("service-hosp")
 public interface HospFeignClient {
 
-
+    // 根据排班Id获取排班信息
     @GetMapping("/hosp/schedule/getFeignScheduleById/{id}")
     ScheduleOrderVo getFeignScheduleById(@PathVariable("id") String ScheduleId);
 }

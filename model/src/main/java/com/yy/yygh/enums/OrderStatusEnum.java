@@ -16,7 +16,7 @@ public enum OrderStatusEnum {
     private String comment ;
 
     public static String getStatusNameByStatus(Integer status) {
-        OrderStatusEnum arrObj[] = OrderStatusEnum.values();
+        OrderStatusEnum[] arrObj = OrderStatusEnum.values();
         for (OrderStatusEnum obj : arrObj) {
             if (status.intValue() == obj.getStatus().intValue()) {
                 return obj.getComment();
@@ -27,7 +27,7 @@ public enum OrderStatusEnum {
 
     public static List<Map<String,Object>> getStatusList() {
         List<Map<String,Object>> list = new ArrayList<>();
-        OrderStatusEnum arrObj[] = OrderStatusEnum.values();
+        OrderStatusEnum[] arrObj = OrderStatusEnum.values();
         for (OrderStatusEnum obj : arrObj) {
             Map<String,Object> map = new HashMap<>();
             map.put("status", obj.getStatus());

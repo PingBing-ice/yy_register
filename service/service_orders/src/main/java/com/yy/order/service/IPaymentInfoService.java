@@ -1,6 +1,8 @@
 package com.yy.order.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.yy.yygh.enums.PaymentTypeEnum;
+import com.yy.yygh.model.order.OrderInfo;
 import com.yy.yygh.model.order.PaymentInfo;
 
 /**
@@ -13,4 +15,5 @@ import com.yy.yygh.model.order.PaymentInfo;
  */
 public interface IPaymentInfoService extends IService<PaymentInfo> {
 
+    void savePaymentInfo(OrderInfo orderInfo, Integer paymentType);
 }

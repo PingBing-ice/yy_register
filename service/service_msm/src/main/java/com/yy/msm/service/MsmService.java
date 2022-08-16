@@ -1,5 +1,6 @@
 package com.yy.msm.service;
 
+import com.yy.yygh.vo.msm.MsmVo;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,4 +15,6 @@ public interface MsmService {
      * @return 结构
      */
     boolean sendCode(String phone);
+
+    void send(MsmVo msmVo);
 }

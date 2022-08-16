@@ -12,7 +12,7 @@ public class OrderQueryVo {
 
 
 	@ApiModelProperty(value = "会员id")
-	private Long userId;
+	private String userId;
 	
 	@ApiModelProperty(value = "订单交易号")
 	private String outTradeNo;

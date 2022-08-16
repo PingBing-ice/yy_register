@@ -26,6 +26,12 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+  #  rabbitMq
+  rabbitmq:
+    username: admin
+    password: 123456
+    host: localhost
+    port: 5672
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
