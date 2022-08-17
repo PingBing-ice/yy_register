@@ -6,6 +6,7 @@ import com.yy.order.service.IOrderInfoService;
 import com.yy.util.result.R;
 import com.yy.util.utils.JwtUtils;
 import com.yy.yygh.enums.OrderStatusEnum;
+import com.yy.yygh.enums.PaymentStatusEnum;
 import com.yy.yygh.model.order.OrderInfo;
 import com.yy.yygh.vo.order.OrderQueryVo;
 import io.swagger.annotations.ApiOperation;
@@ -31,6 +32,7 @@ public class OrderInfoController {
     @Autowired
     private IOrderInfoService orderInfoService;
 
+
     @ApiOperation(value = "创建订单")
     @PostMapping("/auth/submitOrder/{scheduleId}/{patientId}")
     public R submitOrder(
@@ -38,7 +40,7 @@ public class OrderInfoController {
             @PathVariable("patientId") String patientId) {
 
         String orderId = orderInfoService.saveOrder(scheduleId, patientId);
-        return R.ok().data("orderId",orderId);
+        return R.ok().data("orderId", orderId);
     }
 
     //订单列表（条件查询带分页）
@@ -48,10 +50,10 @@ public class OrderInfoController {
                   OrderQueryVo orderQueryVo, HttpServletRequest request) {
         //设置当前用户id
         orderQueryVo.setUserId(JwtUtils.getTokenById(request));
-        Page<OrderInfo> pageParam = new Page<>(page,limit);
+        Page<OrderInfo> pageParam = new Page<>(page, limit);
         IPage<OrderInfo> pageModel =
-                orderInfoService.selectPage(pageParam,orderQueryVo);
-        return R.ok().data("pageModel",pageModel);
+                orderInfoService.selectPage(pageParam, orderQueryVo);
+        return R.ok().data("pageModel", pageModel);
     }
 
     @ApiOperation(value = "获取订单状态")
@@ -61,7 +63,7 @@ public class OrderInfoController {
     }
 
     @GetMapping("/auth/getOrders")
-    public R getOrderInfoById(@RequestParam(value = "orderId",required = false)String orderId) {
+    public R getOrderInfoById(@RequestParam(value = "orderId", required = false) String orderId) {
         if (StringUtils.isEmpty(orderId)) {
             return R.error().message("订单为空");
         }
@@ -69,6 +71,16 @@ public class OrderInfoController {
         if (orderInfo == null) {
             return R.error().message("订单为空");
         }
+        if (orderInfo.getOrderStatus() == 1) {
+            orderInfo.getParam().put("orderStatusString", "支付中");
+        }else if (orderInfo.getOrderStatus() == 2) {
+            orderInfo.getParam().put("orderStatusString", "已支付");
+
+        }else if (orderInfo.getOrderStatus() == -1) {
+            orderInfo.getParam().put("orderStatusString", "已退款");
+        }else orderInfo.getParam().put("orderStatusString", "未支付");
+
+
         return R.ok().data("orderInfo", orderInfo);
     }
 

@@ -34,8 +34,9 @@ public class MsmServiceImpl implements MsmService {
     @Override
     public void send(MsmVo msmVo) {
         log.info(msmVo);
+
         String fourBitRandom = RandomUtil.getFourBitRandom();
-        stringRedisTemplate.opsForValue().set(msmVo.getPhone()+"=="+fourBitRandom,"发送成功",3,TimeUnit.MINUTES);
+        stringRedisTemplate.opsForValue().set(msmVo.getPhone()+"=="+fourBitRandom,msmVo.getTemplateCode(),3,TimeUnit.MINUTES);
 
     }
 

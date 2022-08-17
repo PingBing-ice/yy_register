@@ -20,4 +20,11 @@ public interface IOrderInfoService extends IService<OrderInfo> {
     String saveOrder(String scheduleId, String patientId);
     //订单列表（条件查询带分页）
     IPage<OrderInfo> selectPage(Page<OrderInfo> pageParam, OrderQueryVo orderQueryVo);
+
+    // 取消预约
+    boolean cancelOrder(String orderId);
+
+    // 预约提醒
+    void patientTips(String time);
+
 }

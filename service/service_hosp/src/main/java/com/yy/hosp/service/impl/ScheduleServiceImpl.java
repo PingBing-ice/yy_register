@@ -58,10 +58,18 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public boolean update(OrderMqVo orderMqVo) {
         try {
-            Schedule schedule = scheduleRepository.findById(orderMqVo.getScheduleId()).get();
-            schedule.setReservedNumber(orderMqVo.getReservedNumber());
-            schedule.setAvailableNumber(orderMqVo.getAvailableNumber());
-            scheduleRepository.save(schedule);
+            Schedule schedule = null;
+            if (orderMqVo.getAvailableNumber() != null) {
+                schedule= scheduleRepository.findById(orderMqVo.getScheduleId()).get();
+                schedule.setReservedNumber(orderMqVo.getReservedNumber());
+                schedule.setAvailableNumber(orderMqVo.getAvailableNumber());
+                scheduleRepository.save(schedule);
+            }else {
+                schedule = scheduleRepository.findByHosScheduleId(orderMqVo.getScheduleId());
+                int availableNumber = schedule.getAvailableNumber() + 1;
+                schedule.setAvailableNumber(availableNumber);
+                scheduleRepository.save(schedule);
+            }
             return true;
         } catch (Exception e) {
             return false;

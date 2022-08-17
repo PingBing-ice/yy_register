@@ -1,6 +1,7 @@
 package com.yy.order.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.yy.yygh.model.order.PaymentInfo;
 import com.yy.yygh.model.order.RefundInfo;
 
 /**
@@ -13,4 +14,5 @@ import com.yy.yygh.model.order.RefundInfo;
  */
 public interface IRefundInfoService extends IService<RefundInfo> {
 
+    RefundInfo saveRefundInfo(PaymentInfo paymentInfo);
 }
