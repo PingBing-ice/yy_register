@@ -2,6 +2,7 @@ package com.yy.order.service.impl;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import cn.hutool.core.date.DateTime;
 import com.alibaba.fastjson.JSONObject;
@@ -27,6 +28,8 @@ import com.yy.yygh.model.order.PaymentInfo;
 import com.yy.yygh.model.user.Patient;
 import com.yy.yygh.vo.hosp.ScheduleOrderVo;
 import com.yy.yygh.vo.msm.MsmVo;
+import com.yy.yygh.vo.order.OrderCountQueryVo;
+import com.yy.yygh.vo.order.OrderCountVo;
 import com.yy.yygh.vo.order.OrderMqVo;
 import com.yy.yygh.vo.order.OrderQueryVo;
 import org.springframework.beans.BeanUtils;
@@ -63,6 +66,19 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
 
     @Autowired
     private StringRedisTemplate redisTemplate;
+
+
+    // 获取订单统计数据
+    @Override
+    public Map<String, Object> getCountMap(OrderCountQueryVo orderCountQueryVo) {
+        List<OrderCountVo> countVoList =baseMapper.selectOrderCount(orderCountQueryVo);
+        List<String> reserveDateList = countVoList.stream().map(OrderCountVo::getReserveDate).collect(Collectors.toList());
+        List<Integer> countList = countVoList.stream().map(OrderCountVo::getCount).collect(Collectors.toList());
+        Map<String, Object> map = new HashMap<>();
+        map.put("dateList", reserveDateList);
+        map.put("countList", countList);
+        return map;
+    }
 
     // 预约提醒
     @Override

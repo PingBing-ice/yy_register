@@ -45,5 +45,4 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-wx:
-  cert: D:\JavaUser\\yy_parent\\service\\service_orders\\src\\main\\resources\\apiclient_cert.p12
+  mapper-locations: classpath:com/yy/order/mapper/xml/*.xml

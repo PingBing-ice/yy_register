@@ -24,7 +24,6 @@ public class ConstantPropertiesUtils implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        System.out.println(cert+"===========================================================");
         APPID = appid;
         PARTNER = partner;
         PARTNERKEY = partnerkey;

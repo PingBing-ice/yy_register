@@ -8,6 +8,7 @@ import com.yy.util.utils.JwtUtils;
 import com.yy.yygh.enums.OrderStatusEnum;
 import com.yy.yygh.enums.PaymentStatusEnum;
 import com.yy.yygh.model.order.OrderInfo;
+import com.yy.yygh.vo.order.OrderCountQueryVo;
 import com.yy.yygh.vo.order.OrderQueryVo;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * <p>
@@ -31,6 +33,14 @@ import javax.servlet.http.HttpServletRequest;
 public class OrderInfoController {
     @Autowired
     private IOrderInfoService orderInfoService;
+
+
+
+    @ApiOperation(value = "获取订单统计数据")
+    @PostMapping ("inner/getCountMap")
+    public Map<String, Object> getCountMap(@RequestBody OrderCountQueryVo orderCountQueryVo) {
+        return orderInfoService.getCountMap(orderCountQueryVo);
+    }
 
 
     @ApiOperation(value = "创建订单")

@@ -4,7 +4,10 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yy.yygh.model.order.OrderInfo;
+import com.yy.yygh.vo.order.OrderCountQueryVo;
 import com.yy.yygh.vo.order.OrderQueryVo;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -27,4 +30,5 @@ public interface IOrderInfoService extends IService<OrderInfo> {
     // 预约提醒
     void patientTips(String time);
 
+    Map<String, Object> getCountMap(OrderCountQueryVo orderCountQueryVo);
 }
