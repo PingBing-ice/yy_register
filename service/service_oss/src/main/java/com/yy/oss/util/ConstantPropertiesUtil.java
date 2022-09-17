@@ -8,11 +8,11 @@ package com.yy.oss.util;
 public class ConstantPropertiesUtil {
 
 
-    private static final String endpoint = "oss-cn-hangzhou.aliyuncs.com";
+    private static final String endpoint = "";
 
-    private static final String keyId = "LTAI5tNB3itGeywJ6BtVn3nb";
+    private static final String keyId = "";
 
-    private static final String keySecret = "kjiNPToIUiAODzMqcdP08KBYUazK9J";
+    private static final String keySecret = "";
 
     private static final String bucketName = "bing-edu";
 
